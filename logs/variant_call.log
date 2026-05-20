@@ -1,0 +1,17 @@
+===================================
+VARIANT CALLING PIPELINE STARTED
+Date: Wed May 20 17:55:39 UTC 2026
+Input File: results/alignment/aligned.sam
+===================================
+ERROR: Alignment SAM file not found!
+===================================
+VARIANT CALLING PIPELINE STARTED
+Date: Wed May 20 18:05:09 UTC 2026
+Input File: results/alignment/aligned.sam
+===================================
+Simulating variant calling...
+Generating VCF file...
+===================================
+VARIANT CALLING COMPLETED SUCCESSFULLY
+VCF file generated in: results/variants
+===================================
