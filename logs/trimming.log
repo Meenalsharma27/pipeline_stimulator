@@ -1,0 +1,13 @@
+===================================
+TRIMMING PIPELINE STARTED
+Date: Wed, May 20, 2026  9:16:06 PM
+Input File: data/raw/normal_R1.fastq.gz
+===================================
+Simulating trimming process...
+Removing adapters...
+Filtering low-quality reads...
+Discarding short sequences...
+===================================
+TRIMMING COMPLETED SUCCESSFULLY
+Trimmed files generated in: results/trimmed
+===================================
