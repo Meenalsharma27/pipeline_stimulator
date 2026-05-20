@@ -1,0 +1,14 @@
+===================================
+FASTQC ANALYSIS STARTED
+Date: Wed, May 20, 2026  8:25:15 PM
+Input File: data/raw/normal_R1.fastq.gz
+===================================
+Simulating FastQC analysis...
+Per base sequence quality : PASS
+Per sequence GC content   : PASS
+Adapter contamination     : WARN
+Sequence duplication      : PASS
+===================================
+QC PIPELINE COMPLETED SUCCESSFULLY
+Reports generated in: results/qc/pre_trim
+===================================
