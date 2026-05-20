@@ -50,3 +50,16 @@ Discarding short sequences...
 TRIMMING COMPLETED SUCCESSFULLY
 Trimmed files generated in: results/trimmed
 ===================================
+===================================
+TRIMMING PIPELINE STARTED
+Date: Wed, May 20, 2026 10:37:11 PM
+Input File: data/raw/normal_R1.fastq.gz
+===================================
+Simulating trimming process...
+Removing adapters...
+Filtering low-quality reads...
+Discarding short sequences...
+===================================
+TRIMMING COMPLETED SUCCESSFULLY
+Trimmed files generated in: results/trimmed
+===================================
