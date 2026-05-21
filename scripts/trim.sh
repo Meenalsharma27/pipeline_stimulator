@@ -1,22 +1,32 @@
 #!/bin/bash
 
 # ================================================================
-#          TRIMMING PIPELINE : SIMULATED WORKFLOW
+#            TRIMMING PIPELINE : TRIMMOMATIC WORKFLOW
 # ================================================================
 #
 # DESCRIPTION:
-#   Simulates sequence trimming workflow steps
-#   for FASTQ / FASTQ.GZ files
+#   This script performs sequence trimming on
+#   FASTQ / FASTQ.GZ files using Trimmomatic
 #
 # WORKFLOW:
 #
-#   1. Validate input
-#   2. Create directories
-#   3. Simulate trimming
-#   4. Generate output
-#   5. Save logs
+#   1. Validate input FASTQ
+#   2. Create output folders
+#   3. Run trimming
+#   4. Save logs
+#   5. Verify output
 #
-# USAGE:
+# ------------------------------------------------
+# REQUIRED TOOLS
+# ------------------------------------------------
+#
+# Install:
+#
+#   sudo apt install trimmomatic
+#
+# ------------------------------------------------
+# USAGE
+# ------------------------------------------------
 #
 #   chmod +x trim.sh
 #
@@ -26,11 +36,17 @@
 #
 #   ./trim.sh sample.fastq.gz
 #
-# OUTPUT:
+# ------------------------------------------------
+# OUTPUT
+# ------------------------------------------------
 #
 # results/trim/
 #
 #   sample_trimmed.fastq.gz
+#
+# logs/
+#
+#   trim.log
 #
 # ================================================================
 
@@ -40,14 +56,8 @@
 # ================================================================
 
 if [ $# -ne 1 ]; then
-    echo "=================================================="
-    echo "ERROR: Invalid number of arguments"
     echo "Usage:"
-    echo "    ./trim.sh <FASTQ_FILE>"
-    echo ""
-    echo "Example:"
-    echo "    ./trim.sh sample.fastq.gz"
-    echo "=================================================="
+    echo "./trim.sh <FASTQ_FILE>"
     exit 1
 fi
 
@@ -60,7 +70,42 @@ INPUT_FILE="$1"
 
 
 # ================================================================
-# OUTPUT DIRECTORIES
+# CHECK FILE EXISTS
+# ================================================================
+
+if [ ! -f "$INPUT_FILE" ]; then
+    echo "ERROR: Input file not found!"
+    exit 1
+fi
+
+
+# ================================================================
+# VALIDATE EXTENSION
+# ================================================================
+
+if [[ ! "$INPUT_FILE" =~ \.(fastq|fastq.gz)$ ]]; then
+    echo "ERROR: Accepted formats:"
+    echo ".fastq"
+    echo ".fastq.gz"
+    exit 1
+fi
+
+
+# ================================================================
+# CHECK TRIMMOMATIC
+# ================================================================
+
+if ! command -v trimmomatic &> /dev/null
+then
+    echo "ERROR: Trimmomatic not installed"
+    echo "Install:"
+    echo "sudo apt install trimmomatic"
+    exit 1
+fi
+
+
+# ================================================================
+# DIRECTORY STRUCTURE
 # ================================================================
 
 OUTDIR="results/trim"
@@ -78,41 +123,6 @@ LOGFILE="$LOGDIR/trim.log"
 
 
 # ================================================================
-# START LOGGING
-# ================================================================
-
-echo "==================================================" | tee -a "$LOGFILE"
-echo "         TRIMMING PIPELINE STARTED                " | tee -a "$LOGFILE"
-echo "==================================================" | tee -a "$LOGFILE"
-echo "Date            : $(date)" | tee -a "$LOGFILE"
-echo "Input File      : $INPUT_FILE" | tee -a "$LOGFILE"
-echo "Output Directory: $OUTDIR" | tee -a "$LOGFILE"
-echo "Log File        : $LOGFILE" | tee -a "$LOGFILE"
-echo "==================================================" | tee -a "$LOGFILE"
-
-
-# ================================================================
-# CHECK INPUT FILE EXISTS
-# ================================================================
-
-if [ ! -f "$INPUT_FILE" ]; then
-    echo "ERROR: FASTQ file not found!" | tee -a "$LOGFILE"
-    exit 1
-fi
-
-
-# ================================================================
-# VALIDATE FILE FORMAT
-# ================================================================
-
-if [[ ! "$INPUT_FILE" =~ \.(fastq|fastq.gz)$ ]]; then
-    echo "ERROR: Invalid file format!" | tee -a "$LOGFILE"
-    echo "Accepted formats: .fastq or .fastq.gz" | tee -a "$LOGFILE"
-    exit 1
-fi
-
-
-# ================================================================
 # SAMPLE NAME
 # ================================================================
 
@@ -121,27 +131,44 @@ SAMPLE_NAME=$(basename "$SAMPLE_NAME" .fastq)
 
 OUTPUT_FILE="$OUTDIR/${SAMPLE_NAME}_trimmed.fastq.gz"
 
-echo "Sample Name : $SAMPLE_NAME" | tee -a "$LOGFILE"
-
 
 # ================================================================
-# SIMULATE TRIMMING
+# START LOGGING
 # ================================================================
 
 echo "==================================================" | tee -a "$LOGFILE"
-echo "RUNNING TRIMMING SIMULATION..." | tee -a "$LOGFILE"
+echo "TRIMMING PIPELINE STARTED" | tee -a "$LOGFILE"
+echo "Date : $(date)" | tee -a "$LOGFILE"
+echo "Input : $INPUT_FILE" | tee -a "$LOGFILE"
+echo "Output : $OUTPUT_FILE" | tee -a "$LOGFILE"
 echo "==================================================" | tee -a "$LOGFILE"
 
-echo "Removing low quality bases..." | tee -a "$LOGFILE"
-sleep 1
 
-echo "Removing adapter sequences..." | tee -a "$LOGFILE"
-sleep 1
+# ================================================================
+# RUN TRIMMOMATIC
+# ================================================================
 
-echo "Filtering short reads..." | tee -a "$LOGFILE"
-sleep 1
+echo "Running trimming..." | tee -a "$LOGFILE"
 
-cp "$INPUT_FILE" "$OUTPUT_FILE"
+trimmomatic SE \
+-phred33 \
+"$INPUT_FILE" \
+"$OUTPUT_FILE" \
+LEADING:3 \
+TRAILING:3 \
+SLIDINGWINDOW:4:20 \
+MINLEN:36 \
+2>> "$LOGFILE"
+
+
+# ================================================================
+# CHECK STATUS
+# ================================================================
+
+if [ $? -ne 0 ]; then
+    echo "ERROR: Trimming failed" | tee -a "$LOGFILE"
+    exit 1
+fi
 
 
 # ================================================================
@@ -149,7 +176,7 @@ cp "$INPUT_FILE" "$OUTPUT_FILE"
 # ================================================================
 
 if [ ! -f "$OUTPUT_FILE" ]; then
-    echo "ERROR: Trimmed output not generated!" | tee -a "$LOGFILE"
+    echo "ERROR: Trimmed file not generated" | tee -a "$LOGFILE"
     exit 1
 fi
 
@@ -160,9 +187,8 @@ fi
 
 echo "==================================================" | tee -a "$LOGFILE"
 echo "TRIMMING COMPLETED SUCCESSFULLY" | tee -a "$LOGFILE"
-echo "==================================================" | tee -a "$LOGFILE"
-echo "Sample Processed : $SAMPLE_NAME" | tee -a "$LOGFILE"
-echo "Trimmed File     : $OUTPUT_FILE" | tee -a "$LOGFILE"
-echo "Log File         : $LOGFILE" | tee -a "$LOGFILE"
-echo "Completion Time  : $(date)" | tee -a "$LOGFILE"
+echo "Sample : $SAMPLE_NAME" | tee -a "$LOGFILE"
+echo "Trimmed File : $OUTPUT_FILE" | tee -a "$LOGFILE"
+echo "Log : $LOGFILE" | tee -a "$LOGFILE"
+echo "Finished : $(date)" | tee -a "$LOGFILE"
 echo "==================================================" | tee -a "$LOGFILE"
