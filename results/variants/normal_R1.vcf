@@ -1,0 +1,5 @@
+##fileformat=VCFv4.2
+#CHROM POS ID REF ALT QUAL FILTER INFO
+chr1 105 . A T 99 PASS .
+chr1 210 . G C 85 PASS .
+chr2 450 . T G 92 PASS .
