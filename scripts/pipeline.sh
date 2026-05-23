@@ -38,8 +38,18 @@ bash scripts/qc.sh "$INPUT_FASTQ" || { echo "QC step failed!"; exit 1; }
 echo "STEP 2: TRIMMING"
 bash scripts/trim.sh "$INPUT_FASTQ" || { echo "Trimming step failed!"; exit 1; }
 
+if [ ! -f "$TRIMMED_FASTQ" ]; then
+    echo "ERROR: Trimmed FASTQ not found: $TRIMMED_FASTQ"
+    exit 1
+fi
+
 echo "STEP 3: ALIGNMENT"
 bash scripts/align.sh "$TRIMMED_FASTQ" "$REFERENCE_GENOME" || { echo "Alignment step failed!"; exit 1; }
+
+if [ ! -f "$SORTED_BAM" ]; then
+    echo "ERROR: Sorted BAM not found: $SORTED_BAM"
+    exit 1
+fi
 
 echo "STEP 4: VARIANT CALLING"
 bash scripts/variant_call.sh "$SORTED_BAM" "$REFERENCE_GENOME" || { echo "Variant calling step failed!"; exit 1; }
@@ -51,4 +61,4 @@ echo "Trimmed FASTQ     : $TRIMMED_FASTQ"
 echo "Alignment Results : results/alignment"
 echo "Variant Results   : results/variants"
 echo "Logs              : logs/"
-echo "=================================================="
+echo "==================================================" 
