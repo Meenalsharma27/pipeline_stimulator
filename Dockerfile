@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Set working directory
 WORKDIR /app
 
-# Install required tools
+# Install required bioinformatics tools and utilities
 RUN apt-get update && apt-get install -y \
     bash \
     wget \
@@ -25,13 +25,16 @@ RUN apt-get update && apt-get install -y \
     bcftools \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy all project files
+# Install MultiQC using pip
+RUN pip3 install multiqc
+
+# Copy all project files into container
 COPY . /app
 
-# Give execute permission to scripts
+# Give execute permission to shell scripts
 RUN chmod +x scripts/*.sh
 
-# Create required folders
+# Create required output directories
 RUN mkdir -p \
     results/qc/pre_trim \
     results/trim \
@@ -39,5 +42,5 @@ RUN mkdir -p \
     results/variants \
     logs
 
-# Run pipeline by default
+# Default pipeline execution
 ENTRYPOINT ["bash", "scripts/pipeline.sh"]
