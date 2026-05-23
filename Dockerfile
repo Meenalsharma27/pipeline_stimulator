@@ -1,18 +1,11 @@
 FROM ubuntu:22.04
 
-# ------------------------------------------------
-# PREVENT INTERACTIVE PROMPTS
-# ------------------------------------------------
 ENV DEBIAN_FRONTEND=noninteractive
 
-# ------------------------------------------------
-# SET WORKING DIRECTORY
-# ------------------------------------------------
+# Set working directory
 WORKDIR /app
 
-# ------------------------------------------------
-# INSTALL SYSTEM + BIOINFORMATICS TOOLS
-# ------------------------------------------------
+# Install required tools
 RUN apt-get update && apt-get install -y \
     bash \
     wget \
@@ -26,40 +19,19 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     fastqc \
+    fastp \
     bwa \
     samtools \
     bcftools \
-    trimmomatic \
     && rm -rf /var/lib/apt/lists/*
 
-# ------------------------------------------------
-# INSTALL MULTIQC
-# ------------------------------------------------
-RUN pip3 install multiqc
-
-# ------------------------------------------------
-# VERIFY INSTALLATIONS
-# ------------------------------------------------
-RUN fastqc --version && \
-    multiqc --version && \
-    bwa 2>&1 | head -n 1 && \
-    samtools --version | head -n 1 && \
-    bcftools --version | head -n 1 && \
-    trimmomatic -version || true
-
-# ------------------------------------------------
-# COPY PROJECT FILES
-# ------------------------------------------------
+# Copy all project files
 COPY . /app
 
-# ------------------------------------------------
-# MAKE SHELL SCRIPTS EXECUTABLE
-# ------------------------------------------------
+# Give execute permission to scripts
 RUN chmod +x scripts/*.sh
 
-# ------------------------------------------------
-# CREATE REQUIRED OUTPUT DIRECTORIES
-# ------------------------------------------------
+# Create required folders
 RUN mkdir -p \
     results/qc/pre_trim \
     results/trim \
@@ -67,7 +39,5 @@ RUN mkdir -p \
     results/variants \
     logs
 
-# ------------------------------------------------
-# DEFAULT PIPELINE EXECUTION
-# ------------------------------------------------
+# Run pipeline by default
 ENTRYPOINT ["bash", "scripts/pipeline.sh"]
