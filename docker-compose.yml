@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  bioinfo-pipeline:
+    container_name: builds-pipelinesimulators-container
+
+    image: shruthisundar07/advanced-bioinformatics-pipeline-simulator:v1
+
+    volumes:
+      - ./pipeline_stimulator/data:/app/data
+      - ./pipeline_stimulator/reference:/app/reference
+      - ./pipeline_stimulator/results:/app/results
+      - ./pipeline_stimulator/logs:/app/logs
+
+    command: >
+      
+      data/raw/normal_R1.fastq.gz
+      reference/phix.fa
+
+    restart: "no"
+    tty: true
