@@ -29,22 +29,27 @@ jobs:
           docker run --rm \
           -v ${{ github.workspace }}/data:/data \
           -v ${{ github.workspace }}/reference:/reference \
-          -v ${{ github.workspace }}/output:/output \
+          -v ${{ github.workspace }}/results:/app/results \
+          -v ${{ github.workspace }}/logs:/app/logs \
           pipeline-simulator:latest \
           /data/raw/normal_R1.fastq.gz \
           /reference/phix.fa
 
-      - name: Inspect Output Folder
+      - name: Inspect Results Folder
         run: |
-          echo "===== OUTPUT CONTENT ====="
-          ls -R output || echo "No output folder created"
+          echo "===== RESULTS CONTENT ====="
+          ls -R results || echo "No results folder created"
 
-      - name: Verify Output Exists
+      - name: Verify Variant Output Exists
         run: |
-          if [ ! -f output/result.txt ]; then
-            echo "ERROR: result.txt not found"
+          set -e
+          shopt -s nullglob
+          if [ -z "$(printf '%s\n' results/variants/*.vcf)" ]; then
+            echo "ERROR: no VCF file found in results/variants"
             exit 1
           fi
+          echo "Variant output found:"
+          ls -1 results/variants/*.vcf
 
       - name: Done
         run: echo "Pipeline completed successfully"
