@@ -1,0 +1,15 @@
+.git
+.gitignore
+README.md
+*.log
+__pycache__/
+*.pyc
+.env
+
+results
+data
+*.fastq
+*.fastq.gz
+*.bam
+*.sam
+*.html
