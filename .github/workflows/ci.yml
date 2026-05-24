@@ -23,4 +23,7 @@ jobs:
         run: docker build -t pipeline-stimulator:latest .
 
       - name: Run Docker Container
-        run: docker run pipeline-stimulator:latest
+        run: |
+          docker run pipeline-stimulator:latest \
+          data/raw/fastq.fastq.gz \
+          reference/phix.fa
