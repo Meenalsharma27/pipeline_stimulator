@@ -16,9 +16,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Debug Files (important)
+      - name: Show Repository Structure
         run: |
-          echo "Listing repository structure:"
+          echo "===== REPO FILES ====="
           ls -R
 
       - name: Build Docker Image
@@ -34,10 +34,15 @@ jobs:
           /data/raw/normal_R1.fastq.gz \
           /reference/phix.fa
 
-      - name: Verify Output
+      - name: Inspect Output Folder
+        run: |
+          echo "===== OUTPUT CONTENT ====="
+          ls -R output || echo "No output folder created"
+
+      - name: Verify Output Exists
         run: |
           if [ ! -f output/result.txt ]; then
-            echo "Pipeline failed: output file not found"
+            echo "ERROR: result.txt not found"
             exit 1
           fi
 
