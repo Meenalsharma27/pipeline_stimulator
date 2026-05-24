@@ -16,8 +16,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Workflow Initialized
-        run: echo "CI/CD Pipeline Started"
+      - name: Debug Files (important)
+        run: |
+          echo "Listing repository structure:"
+          ls -R
 
       - name: Build Docker Image
         run: docker build -t pipeline-simulator:latest .
@@ -27,8 +29,9 @@ jobs:
           docker run --rm \
           -v ${{ github.workspace }}/data:/data \
           -v ${{ github.workspace }}/reference:/reference \
+          -v ${{ github.workspace }}/output:/output \
           pipeline-simulator:latest \
-          /data/raw/fastq.fastq.gz \
+          /data/raw/normal_R1.fastq.gz \
           /reference/phix.fa
 
       - name: Verify Output
