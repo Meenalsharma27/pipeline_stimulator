@@ -14,3 +14,59 @@ Creating BAM index...
 ALIGNMENT COMPLETED SUCCESSFULLY
 Alignment files generated in: results/alignment
 ===================================
+==================================================
+             ALIGNMENT PIPELINE STARTED           
+==================================================
+Date            : Sun May 24 05:15:56 UTC 2026
+Input FASTQ     : results/trim/normal_R1_trimmed.fastq.gz
+Reference Genome: reference/phix.fa
+Output Directory: results/alignment
+Log File        : logs/alignment.log
+==================================================
+Sample Name     : normal_R1
+==================================================
+INDEXING REFERENCE GENOME...
+==================================================
+[bwa_index] Pack FASTA... 0.00 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 0.00 seconds elapse.
+[bwa_index] Update BWT... 0.00 sec
+[bwa_index] Pack forward-only FASTA... 0.00 sec
+[bwa_index] Construct SA from BWT and Occ... 0.00 sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa index reference/phix.fa
+[main] Real time: 0.540 sec; CPU: 0.006 sec
+Reference indexing completed.
+==================================================
+RUNNING BWA MEM ALIGNMENT...
+==================================================
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 42419 sequences (4284319 bp)...
+[M::mem_process_seqs] Processed 42419 reads in 0.517 CPU sec, 0.498 real sec
+[main] Version: 0.7.17-r1188
+[main] CMD: bwa mem reference/phix.fa results/trim/normal_R1_trimmed.fastq.gz
+[main] Real time: 3.478 sec; CPU: 0.716 sec
+Alignment completed successfully.
+==================================================
+CONVERTING SAM TO BAM...
+==================================================
+BAM conversion completed.
+==================================================
+SORTING BAM FILE...
+==================================================
+BAM sorting completed.
+==================================================
+INDEXING SORTED BAM...
+==================================================
+BAM indexing completed.
+==================================================
+        ALIGNMENT PIPELINE COMPLETED              
+==================================================
+Sample Processed : normal_R1
+SAM File         : results/alignment/normal_R1.sam
+BAM File         : results/alignment/normal_R1.bam
+Sorted BAM       : results/alignment/normal_R1_sorted.bam
+BAM Index        : results/alignment/normal_R1_sorted.bam.bai
+Log File         : logs/alignment.log
+Completion Time  : Sun May 24 05:16:03 UTC 2026
+==================================================

@@ -15,3 +15,13 @@ Generating VCF file...
 VARIANT CALLING COMPLETED SUCCESSFULLY
 VCF file generated in: results/variants
 ===================================
+==========================================
+VARIANT CALLING STARTED
+==========================================
+Input BAM   : results/alignment/normal_R1_sorted.bam
+Reference   : reference/phix.fa
+Running bcftools mpileup...
+==========================================
+VCF GENERATED: results/variants/normal_R1.vcf
+VARIANT CALLING COMPLETED
+==========================================

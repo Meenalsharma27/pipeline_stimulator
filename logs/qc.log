@@ -26,3 +26,60 @@ Sequence duplication      : PASS
 QC PIPELINE COMPLETED SUCCESSFULLY
 Reports generated in: results/qc/pre_trim
 ===================================
+==================================================
+              QC PIPELINE STARTED                 
+==================================================
+Date            : Sun May 24 05:15:37 UTC 2026
+Input File      : data/raw/normal_R1.fastq.gz
+Output Directory: results/qc/pre_trim
+Log File        : logs/qc.log
+==================================================
+Sample Name     : normal_R1
+==================================================
+RUNNING FASTQC ANALYSIS...
+==================================================
+Started analysis of normal_R1.fastq.gz
+Approx 5% complete for normal_R1.fastq.gz
+Approx 10% complete for normal_R1.fastq.gz
+Approx 15% complete for normal_R1.fastq.gz
+Approx 20% complete for normal_R1.fastq.gz
+Approx 25% complete for normal_R1.fastq.gz
+Approx 30% complete for normal_R1.fastq.gz
+Approx 35% complete for normal_R1.fastq.gz
+Approx 40% complete for normal_R1.fastq.gz
+Approx 45% complete for normal_R1.fastq.gz
+Approx 50% complete for normal_R1.fastq.gz
+Approx 55% complete for normal_R1.fastq.gz
+Approx 60% complete for normal_R1.fastq.gz
+Approx 65% complete for normal_R1.fastq.gz
+Approx 70% complete for normal_R1.fastq.gz
+Approx 75% complete for normal_R1.fastq.gz
+Approx 80% complete for normal_R1.fastq.gz
+Approx 85% complete for normal_R1.fastq.gz
+Approx 90% complete for normal_R1.fastq.gz
+Approx 95% complete for normal_R1.fastq.gz
+FASTQC completed successfully.
+FastQC report generated successfully.
+==================================================
+RUNNING MULTIQC...
+==================================================
+
+/// MultiQC v1.35
+
+       file_search | Search path: /app/results/qc/pre_trim
+            fastqc | Found 1 reports
+     write_results | Existing reports found, adding suffix to filenames. Use '--force' to overwrite.
+     write_results | Data        : results/qc/pre_trim/multiqc_data_1
+     write_results | Report      : results/qc/pre_trim/multiqc_report_1.html
+           multiqc | MultiQC complete
+MULTIQC completed successfully.
+MultiQC report generated successfully.
+==================================================
+         QC PIPELINE COMPLETED SUCCESSFULLY       
+==================================================
+Sample Processed : normal_R1
+FastQC Report    : results/qc/pre_trim/normal_R1_fastqc.html
+MultiQC Report   : results/qc/pre_trim/multiqc_report.html
+Log File         : logs/qc.log
+Completion Time  : Sun May 24 05:15:54 UTC 2026
+==================================================
