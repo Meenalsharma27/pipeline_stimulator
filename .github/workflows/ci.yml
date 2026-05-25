@@ -40,6 +40,38 @@ jobs:
           echo "===== RESULTS CONTENT ====="
           ls -R results || echo "No results folder created"
 
+            - name: Verify FastQC Output
+            
+        run: |
+          ls results/qc/pre_trim/*_fastqc.html
+
+      - name: Verify MultiQC Output
+        run: |
+          ls results/qc/pre_trim/multiqc_report*.html
+
+      - name: Verify Trimmed FASTQ
+        run: |
+          ls results/trim/*_trimmed.fastq.gz
+
+      - name: Verify fastp Reports
+        run: |
+          ls results/trim/*_fastp.html
+          ls results/trim/*_fastp.json
+
+      - name: Verify Alignment Outputs
+        run: |
+          ls results/alignment/*.sam
+          ls results/alignment/*.bam
+          ls results/alignment/*_sorted.bam
+          ls results/alignment/*_sorted.bam.bai
+
+      - name: Verify Log Files
+        run: |
+          ls logs/qc.log
+          ls logs/trim.log
+          ls logs/alignment.log
+          ls logs/variant_call.log
+              
       - name: Verify Variant Output Exists
         run: |
           set -e
