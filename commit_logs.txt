@@ -1,0 +1,44 @@
+﻿dbf7aaf | Afreen Khanam | 2026-05-22 | R25SK000: Update team commit logs
+56eef01 | Afreen Khanam | 2026-05-22 | R25SK000: Update team commit logs
+80b2ff4 | Afreen Khanam | 2026-05-22 | R25SK000: Update team commit logs
+6182978 | DeekshithaBN | 2026-05-22 | Merge branch 'Demo' of https://github.com/Meenalsharma26/pipeline_stimulator into Demo
+d7c23ba | Afreen Khanam | 2026-05-22 | R25SK000: Update team commit logs
+38501d0 | DeekshithaBN | 2026-05-22 | added git documentation workflow
+4face7b | Nischitha216 | 2026-05-21 | integrated pipeline workflow
+b0b9fd1 | Jayanth Kumar | 2026-05-21 | Add reference FASTA file for alignment pipeline
+c4c4995 | Chinmayee | 2026-05-21 | Integrated real variant calling workflow using bcftools
+946ee6b | Chinmayee | 2026-05-21 | Integrated real variant calling workflow
+639561e | Shafa | 2026-05-21 | Added PR review checklist documentation
+ba8ecba | Chinmayee | 2026-05-21 | Updated variant calling script for dynamic input
+719f319 | Chinmayee | 2026-05-20 | Added variant calling pipeline script
+55bdcff | Pranav | 2026-05-21 | Removed trim.sh
+8cdc0da | Jayanth Kumar | 2026-05-21 | qc is back
+3af518d | Neethi Martina | 2026-05-21 | Replace trim.sh inside scripts folder with the new version
+8cb181d | SrinivasuluBonala | 2026-05-21 | Added alignment pipeline script
+6a9bfab | Neethi Martina | 2026-05-21 | Add trim.sh to Demo branch
+17db4d6 | Neethi Martina | 2026-05-21 | Ignore generated logs and results
+b4b2b5a | Neethi Martina | 2026-05-21 | Added simulated trimming workflow
+816a894 | unknown | 2026-05-21 | volume mappig done
+1898bae | unknown | 2026-05-21 | Docker run sucessfull
+f9a618e | DeekshithaBN | 2026-05-21 | added gitworkflow documentation
+4b09b5e | unknown | 2026-05-21 | restored data and logs folders
+ffbd1b6 | DeekshithaBN | 2026-05-21 | Merge branch 'main' of https://github.com/Meenalsharma27/pipeline_stimulator into Demo
+4668fa6 | Shruthi Sundar | 2026-05-21 | Built docker image
+0520867 | unknown | 2026-05-21 | Merge remote-tracking branch 'origin/Demo' into Docker
+ad5a713 | unknown | 2026-05-21 | Dockerfile
+26e66dd | Afreen Khanam | 2026-05-21 | Revert guideline changes and script
+674cb6d | Nischitha216 | 2026-05-21 | Add integrated bioinformatics pipeline workflow
+cf024ec | Afreen Khanam | 2026-05-21 | docs: update team commit logs
+52e7e85 | Afreen Khanam | 2026-05-21 | docs: update full commit documentation
+a8e0e7d | Afreen Khanam | 2026-05-21 | docs: update full commit documentation
+6a7cbaf | Afreen Khanam | 2026-05-21 | docs: update full commit documentation
+476927e | Afreen Khanam | 2026-05-21 | docs: update full commit documentation
+a0dda9d | Afreen Khanam | 2026-05-21 | docs: update team commit logs
+419a15d | Chinmayee | 2026-05-20 | Added variant calling pipeline script
+91c65c6 | SrinivasuluBonala | 2026-05-20 | Moved align.sh to scripts folder
+01a502f | Neethi Martina | 2026-05-20 | Added simulated trimming pipeline
+22c00a5 | unknown | 2026-05-20 | Fixed qc.sh Linux compatibility and updated QC outputs
+a7ee7d4 | Neethi Martina | 2026-05-20 | Fixed trimming pipeline script
+cc32e98 | Neethi Martina | 2026-05-20 | Added simulated trimming pipeline
+d1391e2 | unknown | 2026-05-20 | Added simulated QC pipeline module
+5916f92 | Meenalsharma27 | 2026-05-20 | Initial commit
