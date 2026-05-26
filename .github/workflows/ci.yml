@@ -35,13 +35,12 @@ jobs:
           /data/raw/normal_R1.fastq.gz \
           /reference/phix.fa
 
-      - name: Inspect Results Folder
+          - name: Inspect Results Folder
         run: |
           echo "===== RESULTS CONTENT ====="
           ls -R results || echo "No results folder created"
 
-            - name: Verify FastQC Output
-            
+      - name: Verify FastQC Output
         run: |
           ls results/qc/pre_trim/*_fastqc.html
 
